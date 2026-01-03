@@ -54,16 +54,22 @@ export const App = () => {
       <div className="buttons">
         <button
           type="button"
-          className={`button is-info ${sortField === SORT_FIELD_ALPHABET ? 'is-light' : ''}`}
-          onClick={() => setSortField(SORT_FIELD_ALPHABET)}
+          className={`button is-info ${sortField === SORT_FIELD_ALPHABET ? '' : 'is-light'}`}
+          onClick={() => {
+            setSortField(SORT_FIELD_ALPHABET);
+            setReverse(false);
+          }}
         >
           Sort alphabetically
         </button>
 
         <button
           type="button"
-          className={`button is-success ${sortField === SORT_FIELD_LENGTH ? 'is-light' : ''}`}
-          onClick={() => setSortField(SORT_FIELD_LENGTH)}
+          className={`button is-success ${sortField === SORT_FIELD_LENGTH ? '' : 'is-light'}`}
+          onClick={() => {
+            setSortField(SORT_FIELD_LENGTH);
+            setReverse(false);
+          }}
         >
           Sort by length
         </button>
@@ -76,13 +82,20 @@ export const App = () => {
           Reverse
         </button>
 
-        <button
-          type="button"
-          className={`button is-danger ${sortField === SORT_FIELD_RESET ? 'is-light' : ''}`}
-          onClick={() => setSortField('')}
-        >
-          Reset
-        </button>
+        {sortField || reverse ? (
+          <button
+            type="button"
+            className={`button is-danger ${sortField === SORT_FIELD_RESET ? 'is-light' : ''}`}
+            onClick={() => {
+              setSortField('');
+              setReverse(false);
+            }}
+          >
+            Reset
+          </button>
+        ) : (
+          ''
+        )}
       </div>
 
       <ul>
